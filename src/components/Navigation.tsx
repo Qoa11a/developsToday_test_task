@@ -4,35 +4,47 @@ import Link from 'next/link';
 const Nav = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 60px;
+  width: 940px;
+  margin: 60px auto;
 `;
 
 const List = styled.ul`
   display: flex;
   justify-content: space-between;
-  width: 800px;
+  width: 1000px;
+  height: 40px;
 `;
 
 const A = styled.a`
   text-decoration: none;
-  ::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 2px;
-    background: #89939a;
-    transition: width 0.3s;
-  }
-  :hover::after {
-    width: 100%;
-  }
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const ListItem = styled.li`
   font-weight: bold;
+  display: flex;
+  position: relative;
+
+  ::after {
+    content: '';
+    width: 0;
+    opacity: 0;
+    height: 2px;
+    background: #66fcf1;
+    transition: width 0.3s, opacity 0s;
+    transition-delay: 0s, 0.3s;
+    position: absolute;
+    border-radius: 15px;
+    bottom: 0;
+    left: 0;
+  }
+  :hover::after {
+    width: 100%;
+    opacity: 1;
+    transition-delay: 0s, 0s;
+  }
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const Navigation = (): JSX.Element => (

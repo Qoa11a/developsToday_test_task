@@ -1,6 +1,6 @@
 import { useState, ChangeEvent } from 'react';
-import { IPostMainData } from '@typeDefs/IPost';
-import { createPost } from '@api/apiPosts';
+import { IPostMainData, IPost } from '@typeDefs/IPost';
+import { createPost, updatePost } from '@api/apiPosts';
 import styled from 'styled-components';
 
 const Form = styled.form`
@@ -9,9 +9,59 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-const CreatePost: React.FC = () => {
-  const [title, updateTitle] = useState<string>('');
-  const [body, updateBody] = useState<string>('');
+const Input = styled.input`
+  outline: none;
+  color: #45a29e;
+  border: 1px solid #45a29e;
+  background-color: #0b0c10;
+  border-radius: 5px;
+  height: 30px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  :focus {
+    border-color: #69faf4;
+  }
+`;
+
+const TextArea = styled.textarea`
+  outline: none;
+  color: #45a29e;
+  border: 1px solid #45a29e;
+  background-color: #0b0c10;
+  border-radius: 5px;
+  height: 100px;
+  margin-bottom: 10px;
+  padding: 10px 0 0 10px;
+  :focus {
+    border-color: #69faf4;
+  }
+`;
+
+const Button = styled.button`
+  outline: none;
+  color: #45a29e;
+  background-color: #0b0c10;
+  border: 1px solid #45a29e;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: color 0.3s, border-color 0.3s;
+  height: 50px;
+  :focus,
+  :hover {
+    cursor: pointer;
+    color: #69faf4;
+    border-color: #69faf4;
+  }
+`;
+
+interface IProps {
+  post?: IPost;
+  onChanged?: (post: IPost) => void;
+}
+
+const CreatePost: React.FC<IProps> = ({ post, onChanged }) => {
+  const [title, updateTitle] = useState<string>(post?.title ?? '');
+  const [body, updateBody] = useState<string>(post?.body ?? '');
 
   const onTitleChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -23,22 +73,33 @@ const CreatePost: React.FC = () => {
     updateBody(e.currentTarget.value);
   };
 
-  const onSubmitHandler = (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const savePost = async () => {
     const payload: IPostMainData = {
       title,
       body,
     };
-    createPost(payload);
-    updateTitle('');
-    updateBody('');
+    if (post) {
+      const res = await updatePost(payload, post.id);
+      if (onChanged) {
+        onChanged(res.data);
+      }
+    } else {
+      await createPost(payload);
+      updateTitle('');
+      updateBody('');
+    }
+  };
+
+  const onSubmitHandler = (e: ChangeEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    savePost();
   };
 
   return (
     <Form method="post" onSubmit={onSubmitHandler}>
-      <input type="text" placeholder="Title" value={title} onChange={onTitleChangeHandler} />
-      <textarea placeholder="Post" value={body} onChange={onBodyChangeHandler} />
-      <button type="submit">Submit</button>
+      <Input type="text" placeholder="Title" value={title} onChange={onTitleChangeHandler} />
+      <TextArea placeholder="Post" value={body} onChange={onBodyChangeHandler} />
+      <Button type="submit">Submit</Button>
     </Form>
   );
 };

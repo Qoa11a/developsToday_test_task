@@ -1,25 +1,22 @@
 import { GetStaticProps, NextPage } from 'next';
 import { IPost } from '@typeDefs/IPost';
 import { getPosts } from '@api/apiPosts';
-import PostCard from '@components/PostCard';
+import PostList from '@components/PostList';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-interface IProps {
+export interface IProps {
   posts: IPost[];
 }
+
+const Container = styled.div`
+  width: 1000px;
+  margin: auto;
+`;
 
 const Home: NextPage<IProps> = ({ posts }) => {
   return (
     <Container>
-      {posts.map((post) => (
-        <PostCard post={post} key={post.id} />
-      ))}
+      <PostList posts={posts} />
     </Container>
   );
 };
@@ -30,7 +27,7 @@ export const getStaticProps: GetStaticProps<IProps> = async () => {
 
   return {
     props: {
-      posts: posts.slice(0, 10),
+      posts: posts.sort((a, b) => b.id - a.id).slice(0, 10),
     },
   };
 };

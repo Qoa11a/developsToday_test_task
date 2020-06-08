@@ -1,25 +1,22 @@
 import { GetStaticProps, NextPage } from 'next';
 import { getPosts } from '@api/apiPosts';
 import { IPost } from '@typeDefs/IPost';
-import PostCard from '@components/PostCard';
+import PostList from '@components/PostList';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`;
-
-interface IProps {
+export interface IProps {
   posts: IPost[];
 }
+
+const Container = styled.div`
+  width: 1000px;
+  margin: auto;
+`;
 
 const Posts: NextPage<IProps> = ({ posts }) => {
   return (
     <Container>
-      {posts.map((post) => (
-        <PostCard post={post} key={post.id} />
-      ))}
+      <PostList posts={posts} />
     </Container>
   );
 };
