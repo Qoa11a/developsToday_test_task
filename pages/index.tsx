@@ -1,4 +1,4 @@
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { IPost } from '@typeDefs/IPost';
 import { getPosts } from '@api/apiPosts';
 import PostList from '@components/PostList';
@@ -21,7 +21,7 @@ const Home: NextPage<IProps> = ({ posts }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<IProps> = async () => {
+export const getServerSideProps: GetServerSideProps<IProps> = async () => {
   const res = await getPosts();
   const posts = res.data;
 
