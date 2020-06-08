@@ -130,6 +130,12 @@ const DeleteBtn = styled.button`
   }
 `;
 
+const CreatePostContainer = styled.div`
+  width: 700px;
+  display: flex;
+  margin: 0 auto 30px;
+`;
+
 interface IProps {
   serverPost: IPost;
 }
@@ -182,7 +188,9 @@ const Posts: NextPage<IProps> = ({ serverPost }) => {
   return (
     <Container>
       {isEditMode ? (
-        <CreatePost post={post} onChanged={onUpdatePost} />
+        <CreatePostContainer>
+          <CreatePost post={post} onChanged={onUpdatePost} />
+        </CreatePostContainer>
       ) : (
         <Post>
           <Title>{post.title}</Title>
