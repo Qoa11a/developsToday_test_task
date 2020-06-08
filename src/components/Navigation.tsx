@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Link from 'next/link';
+import Link from './Link';
 
 const Nav = styled.div`
   display: flex;
@@ -51,17 +51,17 @@ const Navigation = (): JSX.Element => (
   <Nav>
     <List>
       <ListItem>
-        <Link href="/">
+        <Link href="/" activeClassName="active">
           <A>Home Page</A>
         </Link>
       </ListItem>
       <ListItem>
-        <Link href="/posts">
+        <Link href="/posts" activeClassName="active">
           <A>All Posts</A>
         </Link>
       </ListItem>
       <ListItem>
-        <Link href="/posts/new">
+        <Link href="/posts/new" activeClassName="active">
           <A>Create a New Post</A>
         </Link>
       </ListItem>

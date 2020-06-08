@@ -2,5 +2,19 @@
 
 body {
   background-color: #1f2833;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif; 
+}
+
+.active::after {
+  content: '';
+  width: 100%;
+  opacity: 1;
+  height: 2px;
+  background: #66fcf1;
+  transition: width 0.3s, opacity 0s;
+  transition-delay: 0s, 0.3s;
+  position: absolute;
+  border-radius: 15px;
+  bottom: 0;
+  left: 0;
 }

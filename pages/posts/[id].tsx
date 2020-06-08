@@ -66,7 +66,7 @@ const ComInput = styled.input`
   border: 1px solid #45a29e;
   background-color: #0b0c10;
   border-radius: 5px;
-  height: 30px;
+  height: 50px;
   margin-bottom: 10px;
   padding-left: 10px;
   :focus {
@@ -130,22 +130,6 @@ const DeleteBtn = styled.button`
     border-color: #69faf4;
   }
 `;
-
-// const ShouldDelete = styled.div`
-//   color: #45a29e;
-// `;
-// const DeleteTitle = styled.div`
-//   color: #45a29e;
-// `;
-// const DeleteBody = styled.div`
-//   color: #45a29e;
-// `;
-// const ButtonYes = styled.button`
-//   color: #45a29e;
-// `;
-// const ButtonNo = styled.button`
-//   color: #45a29e;
-// `;
 
 interface IProps {
   serverPost: IPost;
@@ -212,18 +196,6 @@ const Posts: NextPage<IProps> = ({ serverPost }) => {
       ],
     };
     confirmAlert(options);
-
-    // const options = {
-    //   customUI: () => (
-    //     <ShouldDelete>
-    //       <DeleteTitle>Delete {post.title}?</DeleteTitle>
-    //       <DeleteBody>You want to delete this file?</DeleteBody>
-    //       <ButtonYes onClick={() => deletePost()}>Yes</ButtonYes>
-    //       <ButtonNo onClick={() => false}>No</ButtonNo>
-    //     </ShouldDelete>
-    //   ),
-    // };
-    // confirmAlert(options);
   };
 
   return (
