@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { getPostById, saveNewComment, deletePostById } from '@api/apiPosts';
 import { useState, ChangeEvent, MouseEvent } from 'react';
 import CreatePost from '@components/CreatePost';
-import { confirmAlert } from 'react-confirm-alert';
 
 const Container = styled.div`
   width: 1000px;
@@ -175,27 +174,9 @@ const Posts: NextPage<IProps> = ({ serverPost }) => {
     changeEditMode(!isEditMode);
   };
 
-  const deletePost = async () => {
-    await deletePostById(post.id);
-    router.back();
-  };
-
   const onDeleteClickHandler = () => {
-    const options = {
-      title: `Delete ${post.title}?`,
-      message: "Are you sure? You can't undo this action",
-      buttons: [
-        {
-          label: 'Yes',
-          onClick: () => deletePost(),
-        },
-        {
-          label: 'No',
-          onClick: () => false,
-        },
-      ],
-    };
-    confirmAlert(options);
+    deletePostById(post.id);
+    router.back();
   };
 
   return (

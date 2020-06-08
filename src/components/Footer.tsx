@@ -10,6 +10,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid #66fcf1;
 `;
 
 const Title = styled.h1`

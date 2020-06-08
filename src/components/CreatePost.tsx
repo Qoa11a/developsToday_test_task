@@ -97,8 +97,8 @@ const CreatePost: React.FC<IProps> = ({ post, onChanged }) => {
 
   return (
     <Form method="post" onSubmit={onSubmitHandler}>
-      <Input type="text" placeholder="Title" value={title} onChange={onTitleChangeHandler} />
-      <TextArea placeholder="Post" value={body} onChange={onBodyChangeHandler} />
+      <Input required type="text" placeholder="Title" value={title} onChange={onTitleChangeHandler} />
+      <TextArea required placeholder="Post" value={body} onChange={onBodyChangeHandler} />
       <Button type="submit">Submit</Button>
     </Form>
   );
