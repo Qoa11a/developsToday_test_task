@@ -1,4 +1,4 @@
-(Demo Link)[https://develops-today-test-task-ten.now.sh/]
+[Demo Link](https://develops-today-test-task-ten.now.sh/)
 
 How to run it:
 
